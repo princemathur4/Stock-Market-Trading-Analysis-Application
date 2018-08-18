@@ -24,4 +24,5 @@ First, you'll have to open the project_file in the folder after downloading for 
 Second, if any of the files, that is uploaded in this repository, is not downloaded, then the code will show errors.
 
 NOTE: Some local paths to data and image files are given in the code, so if they are moved to different locations the program will not run.
+
 This Project is still in developing stage, only a basic idea of the actual project is presented here. 
