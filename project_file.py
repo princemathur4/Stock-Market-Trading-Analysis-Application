@@ -139,15 +139,6 @@ def pred_date(no, my_num):
             my_num -= 1
     return my_num
 
-
-# bbands = compute_ballinger_bands(df_sliced)
-# bbands = bbands.fillna(0)
-# print("ballinger bands: \n", bbands)
-#
-# for date, band in zip(bbands.index, bbands.SPY):
-#     if (band > 1):
-#         print("Date: ", date.strftime("%d-%m-%y"), "band: ", band)
-
 class SampleApp(tk.Tk):
 
     def __init__(self, *args, **kwargs):
@@ -166,18 +157,8 @@ class SampleApp(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        # for F in (StartPage, PageOne, PageTwo):
-        #     page_name = F.__name__
-        #     # print("Name is: ",page_name,",F is:",F,"page_name is of the type: ",type(page_name))
-        #     frame = F(parent=container, controller=self)
-        #     self.frames[page_name] = frame
-        #     # put all of the pages in the same location;
-        #     # the one on the top of the stacking order
-        #     # will be the one that is visible.
-        #     frame.grid(row=0, column=0, sticky="nsew")
-
+        
         self.frames["WelcomePage"] = WelcomePage(parent=container, controller=self)
-        print(self.frames["WelcomePage"])
         self.frames["ActiveTrading"] = ActiveTrading(parent=container, controller=self)
         self.frames["PassiveTrading"] = PassiveTrading(parent=container, controller=self)
         self.frames["ShowStocks"] = ShowStocks(parent=container, controller=self)
@@ -220,7 +201,7 @@ class WelcomePage(tk.Frame):
 
         label = tk.Label(background_label, text="Stock Market Trading Application", font=('roboto', 36, 'bold'),
                          bg='#008080', fg='#102933')
-        # label.font= ('roboto',18)
+
         button1 = tk.Button(background_label, text=" Active Trading ", width=18, height=2, bg="#102933", fg="white",
                             font=(25),
                             command=lambda: controller.show_frame("ActiveTrading"))
@@ -241,27 +222,13 @@ class WelcomePage(tk.Frame):
                             command=lambda: controller.show_frame("CompareStocks"))
 
         label.pack(side="top", fill="x", pady=10)
-        # button1.pack(side="left")
-        # button2.pack(side="left")
-        # label1.pack(side="top", fill="x", pady=10)
-        # button3.pack(side="left")
-        # button4.pack(side="left")
+        
         button1.place(x=420, y=100)
         button2.place(x=800, y=100)
         label1.place(x=458, y=200)
         button3.place(x=420, y=300)
         button4.place(x=800, y=300)
-        # label_fake=tk.Label(background_label,text="")
-        # label_fake.grid(row=0,column=0, rowspan=2,columnspan=10,sticky='NSEW')
-
-        # label.grid(row=0,column=3, rowspan=2,columnspan=9,    sticky='NSEW',padx=0,pady=60)
-        # button1.grid(row=2, column=0, rowspan=2,columnspan=3, sticky='NSEW',padx=300,pady=0)
-        # button2.grid(row=2, column=3, rowspan=2,columnspan=3, sticky='NSEW',padx=0,pady=0)
-        # label1.grid(row=4, column=0, rowspan=1,columnspan=5,  sticky='NSEW',padx=120,pady=0)
-        # button3.grid(row=5, column=0, rowspan=2,columnspan=2, sticky='NSEW',padx=150,pady=0,ipadx="7",ipady="2")
-        # button4.grid(row=5, column=2, rowspan=2,columnspan=2, sticky='NSEW',padx=0,pady=0)
-
-
+        
 class ActiveTrading(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -282,15 +249,6 @@ class ActiveTrading(tk.Frame):
         button_daily = tk.Button(bg_label, text="Daily Returns " ,bg="#00182B",fg='white',font=("roboto",12,"bold"),width=18, height=1,
                             command=lambda: controller.show_frame("DailyReturns"))
 
-        # img = PhotoImage(file="capm_image.png", height=19, width=198)
-        # # btn = Button(root, image=img)
-        # button_capm = ttk.Button(self, image=img,
-        #                          command=lambda: controller.show_frame("Beta"))
-        # button_capm.image = img
-        # # button_capm=ttk.Button(self, text="CAPM",
-        # #                    command=lambda: controller.show_frame("Beta"))
-        # button_capm.pack()
-
         button_beta = tk.Button(bg_label, text="Beta", bg="#00182B",fg='white',font=("roboto",12,"bold"),width=18, height=1,
                                 command=lambda: controller.show_frame("Beta"))
         button_alpha = tk.Button(bg_label, text="Alpha",bg="#00182B",fg='white',font=("roboto",12,"bold"),width=18, height=1,
@@ -298,9 +256,9 @@ class ActiveTrading(tk.Frame):
 
         button_home = tk.Button(bg_label, text="Go back to home page",bg="#00182B",fg='white',font=("roboto",10,"bold"),width=18, height=1,
                                 command=lambda: controller.show_frame("WelcomePage"))
+
         label_activ.pack(side="top", fill="x",pady=10)
         label_desc.place  (x=35,y=100)# side="top", fill="x",padx=300,pady=10)
-        # button_port.place(x=)
         button_port.place (x=120,y=190)
         label_right.place (x=720,y=90)
         button_daily.place(x=870,y=160)
@@ -353,12 +311,9 @@ class Beta(tk.Frame):
             canvas.draw()  # canvas.show()
             canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
 
-            # button2 = ttk.Button(right_frame, text="Go back to home page ",
-            #                      command=lambda: controller.show_frame("WelcomePage"))
             button3 = ttk.Button(bottom, text="Clear ",
                                  command=lambda: bottom.destroy())
             button3.pack()
-            # button2.pack()
             count += 1
 
         def fake_predict(x, m, c):
@@ -388,12 +343,11 @@ class Beta(tk.Frame):
 
             m = (((np.mean(x) * np.mean(y)) - np.mean(x * y)) / ((np.mean(x) ** 2) - (np.mean(x ** 2))))
             c = (np.mean(y) - (m * np.mean(x)))
-            # print(m)
 
             m_str = str(m)
             res.config(text="Beta = " + m_str)
             p = fake_predict((maxi, mini), m, c)
-            # df_x, df_y
+
             beta_count += 1
             lastend = [maxi, mini]
             plot_data(df_spy_company, company, lastend, p)
@@ -419,7 +373,6 @@ class Beta(tk.Frame):
             start_date = '2018-01-01'
             end_date = '2018-05-18'
 
-            # df_spy_beta = get_data([], start_date, end_date)
             df_company_SPY = get_data([company], start_date, end_date)
             df_daily = compute_daily_returns(df_company_SPY)
             df_spy_beta = slice_data(df_company_SPY, start_date, end_date, 'SPY')
@@ -427,9 +380,6 @@ class Beta(tk.Frame):
             df_sliced_company_beta = slice_data(df_company_SPY, start_date, end_date, company)
             company_daily = compute_daily_returns(df_sliced_company_beta)
             calculate_beta(spy_daily, company_daily, company, df_daily)
-            # plot_data(df_daily, company)
-            # alpha(df_daily)
-            # print(df_daily)
             return
 
         w = ttk.OptionMenu(left_frame, variable, *OPTIONS, command=option_selection_menu)
@@ -438,8 +388,6 @@ class Beta(tk.Frame):
         button2 = ttk.Button(left_frame, text="Go back to Active trading page",
                              command=lambda: controller.show_frame("ActiveTrading"))
         button2.pack()
-        # ret_day = calculate_beta(df_spy, df_company) * ret_market(df_spy) + alpha(df_company)
-
 
 class Alpha(tk.Frame):
 
@@ -452,11 +400,13 @@ class Alpha(tk.Frame):
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
 
         label1 = tk.Label(bg_label, text=" Alpha or Prediction value ", font=('Roboto',24,"bold"), justify="center",bg="#3C3E4F",fg="#537194")
-        # label1.place(x=20,y=20)
         label1.pack(side="top", fill="x", pady=19)
+
         label2 = tk.Label(bg_label, text="Select the stocks below.", font=('Roboto',14,"bold"), justify="center",bg="#353747",fg="#537194")
         label2.place(x=30,y=70)
+
         options1 = ['Select date to predict for', '1 day ahead', '5 days ahead', '10 days ahead', '20 days ahead']
+
         variable1 = tk.StringVar(bg_label)
         variable1.set(options1[1])
 
@@ -584,13 +534,9 @@ class Alpha(tk.Frame):
         button2 = ttk.Button(bg_label, text="Go back to Active trading page",
                              command=lambda: controller.show_frame("ActiveTrading"))
         button2.place(x=30,y=240)
-        # ret_day = calculate_beta(df_spy, df_company) * ret_market(df_spy) + alpha(df_company)
-
 
 folio_set = set()
 folio_list = []
-
-
 class Portfolio(ttk.Frame):
 
     def __init__(self, parent, controller):
@@ -603,14 +549,14 @@ class Portfolio(ttk.Frame):
 
         left_frame = ttk.Frame(self)
         left_frame.place(x=10, y=100)
-        # left_frame.grid(row=0, column=0, padx=8, pady=100)
+
         right_frame = ttk.Frame(self)
         right_frame.place(x=500, y=100)
-        # right_frame.grid(row=0, column=1, padx=20, pady=100)
+
         global p_port_alpha
         label = ttk.Label(left_frame, text="This section is to make your own Portfolio ", font=controller.general_font)
-        # label.pack(side="top", fill="x", padx=150, pady=10)
         label.place(x=10,y=10)
+
         label_add = ttk.Label(left_frame, text="Add stocks to the portfolio below: ", font=controller.general_font,
                               justify="center")
         label_add.pack(side="top", fill="x", padx=150, pady=10)
@@ -680,8 +626,6 @@ class Portfolio(ttk.Frame):
             alpha_str = str(val_alpha_port)
 
             res.config(text="Prediction = " + pred_str + "i.e." + alpha_str + "%")
-
-            # plot_data([1, pred], [pred_value_1, pred_value_2],company,X_preserve,y)
             count_pf += 1
             return
 
@@ -709,7 +653,6 @@ class Portfolio(ttk.Frame):
             global folio_list, folio_set, count_show_folio
             folio_list[:] = []
             folio_set.clear()
-            # count_show_folio
             show_folio()
             return
 
@@ -725,7 +668,6 @@ class Portfolio(ttk.Frame):
             f1 = Figure(figsize=(8, 4), dpi=100)
             axes = f1.add_subplot(111)
             axes.plot(df_comp)
-            # axes.plot(X, Y)
             axes.set_xlabel('Trading Days -->')
             axes.set_ylabel('Normalized Price -->')
             axes.set_title("Our portfolio in comparison to market ")
@@ -761,23 +703,18 @@ class Portfolio(ttk.Frame):
             df_sliced_company = df.ix[start_date:end_date, folio_list]
             df_normalized_company = normalize_data(df_sliced_company)
             df_normalized_SPY = normalize_data(df_SPY)
-            print("##################### NORMALIZED SPY #################### \n", df_normalized_SPY)
+
             df_normalized_company[df_normalized_company.select_dtypes(include=['number']).columns] *= weight
-            print("##################### NORMALIZED COMP ###################\n", df_normalized_company)
             s_portfolio = df_normalized_company.sum(axis=1)
-            # print("######### summated portfolio #########\n",type(s_portfolio),"\n",s_portfolio)
             df_portfolio = s_portfolio.to_frame()
-            print("############ df_portfolio ###########\n",df_portfolio)
             df_portfolio1 = df_portfolio
             df_portfolio = pd.DataFrame(df_portfolio, columns=['nn'])
             df_portfolio = df_portfolio1.join(df_portfolio, how='inner')
-            # print(df_portfolio)
             df_portfolio = df_portfolio.rename(columns={0: 'Portfolio'})
             df_portfolio = df_portfolio.ix[start_date: end_date, ['Portfolio']]
-
             calculate_alpha(df_portfolio, end_date)
             df_portfolio = df_normalized_SPY.join(df_portfolio, how='inner')
-            print("##################### NORMALIZED PORTFOLIO #################### \n", df_portfolio)
+
             plot_data(df_portfolio)
 
             return
@@ -813,10 +750,9 @@ class PassiveTrading(ttk.Frame):
         bg_label.image = filename
         bg_label.place(x=0, y=0, relwidth=1, relheight=1)
         left_frame = Frame(bg_label, bg="#354562")
-        # top_frame.place(x=400, y=100)
         left_frame.grid(row=0, column=0, padx=50, pady=100)
+
         right_frame = Frame(bg_label, bg="#354562")
-        # bottom_frame.place(x=400,y=100)
         right_frame.grid(row=0, column=1, padx=20, pady=100)
 
         label = tk.Label(left_frame, text="Long term Investment", font=controller.general_font, justify="center",
@@ -867,7 +803,6 @@ class PassiveTrading(ttk.Frame):
                                  command=lambda: bottom.destroy())
             button3.pack()
             label_showing.pack()
-            # button2.pack()
             count_pt += 1
 
         def option_selection_menu(event):
@@ -899,10 +834,8 @@ class ShowStocks(ttk.Frame):
         ttk.Frame.__init__(self, parent)
         self.controller = controller
         left_frame = Frame(self, bg="gainsboro")
-        # top_frame.place(x=400, y=100)
         left_frame.grid(row=0, column=0, padx=100, pady=100)
         right_frame = Frame(self)
-        # bottom_frame.place(x=400,y=100)
         right_frame.grid(row=0, column=1, padx=20, pady=100)
         label = ttk.Label(left_frame, text="Select the stocks below.", font=controller.title_font)
         label.pack(side="top", fill="x", padx=10, pady=10)
@@ -979,10 +912,7 @@ class ShowStocks(ttk.Frame):
 
         def option_selection_menu(event):
             global start_ss
-            # start_date = '2017-05-23'
-            # end_date = '2018-05-23'
             company = str(COMPANY_LIST.get(variable.get(), "SPY"))
-            # start_date = '2018-01-23'
             end_ss = '2018-05-23'
             df = get_data([company], start_ss, end_ss)
             df_sliced = slice_data(df, start_ss, end_ss, company)
@@ -1009,10 +939,8 @@ class CompareStocks(ttk.Frame):
         ttk.Frame.__init__(self, parent)
         self.controller = controller
         left_frame = ttk.Frame(self)
-        # left_frame.place(x=400, y=100)
         left_frame.grid(row=0, column=0, padx=100, pady=100)
         right_frame = ttk.Frame(self)
-        # right_frame.place(x=400,y=100)
         right_frame.grid(row=0, column=1, padx=20, pady=100)
         label = ttk.Label(left_frame, text="Select the stocks below.", font=controller.title_font, justify='center')
         label.pack(side="top", fill="x", padx=10, pady=10)
@@ -1058,12 +986,9 @@ class CompareStocks(ttk.Frame):
             canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
 
             canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
-            # button2= ttk.Button(right_frame, text="Go back to home page ",
-            #                     command=lambda: controller.show_frame("WelcomePage"))
             button3 = ttk.Button(bottom, text="Clear ",
                                  command=lambda: bottom.destroy())
             button3.pack()
-            # button2.pack()
             count_cs += 1
 
         def option_selection_menu(event):
@@ -1071,7 +996,6 @@ class CompareStocks(ttk.Frame):
             start_date = '2014-03-18'
             end_date = '2018-03-18'
             df_stock = get_data([company], start_date, end_date)
-            # df_stock_sliced= slice_data(df,start_date,end_date,company)
 
             df_norm = normalize_data(df_stock)
             plot_data(df_norm, company)
@@ -1087,11 +1011,11 @@ class DailyReturns(ttk.Frame):
         ttk.Frame.__init__(self, parent)
         self.controller = controller
         left_frame = ttk.Frame(self)
-        # top_frame.place(x=400, y=100)
         left_frame.pack(padx=100, side=LEFT)
+
         right_frame = ttk.Frame(self)
-        # bottom_frame.place(x=400,y=100)
         right_frame.pack(padx=10, side=LEFT)
+
         label = ttk.Label(left_frame, text="Daily Returns", font=controller.title_font, justify='center')
         label.pack(side="top", fill="x", padx=10, pady=10)
 
@@ -1120,8 +1044,6 @@ class DailyReturns(ttk.Frame):
             bottom = ttk.Label(right_frame)
             bottom.grid(column=0, row=1)
 
-            # bottom.pack(padx=5, pady=10)
-            # w.pack(padx=5, pady=10, side=LEFT)
             f1 = Figure(figsize=(8, 4), dpi=100)
             axes = f1.add_subplot(111)
             axes.plot(df_comp)
@@ -1135,12 +1057,11 @@ class DailyReturns(ttk.Frame):
             canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
 
             canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
-            # button2 = ttk.Button(right_frame, text="Go back to home page ",
-            #                      command=lambda: controller.show_frame("WelcomePage"))
+
             button3 = ttk.Button(bottom, text="Clear ",
                                  command=lambda: bottom.destroy())
             button3.pack()
-            # button2.pack()
+
             count_dr += 1
 
         res_daily = Label(left_frame, text="", font=("arial", 1))
