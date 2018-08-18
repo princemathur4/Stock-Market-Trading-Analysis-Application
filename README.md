@@ -1,6 +1,6 @@
 # Stock-Market-Trading-Application
 
-Python-Machine learning based project based on the Machine learning for trading course on Udacity. 
+Python-Machine learning project based on the course- "Machine learning for trading" on Udacity. 
 This Code is for runnning a tkinter - GUI application.
 
 Features: 
