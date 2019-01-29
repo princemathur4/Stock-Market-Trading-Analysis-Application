@@ -1,44 +1,21 @@
-import tkinter as tk  # python 3
-from tkinter import font  as tkfont
-from tkinter import ttk
-from tkinter import *
 import numpy as np
 import pandas as pd
 from sklearn import linear_model
 from datetime import datetime
 import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
 from matplotlib.figure import Figure
 import quandl
 import math
 import os
 import sys
 
-if sys.version_info[0] < 3:
-    import Tkinter as Tk
-else:
-    import tkinter as Tk
 from dateutil.parser import parse
-from sklearn.metrics import accuracy_score, r2_score
 
-# alpha_accu=0
 p_port_alpha = '2018-05-24'
 p_alpha = '2018-05-24'
-count = 0
-count_pf = 0
-count_plt = 0
-count_ss = 0
-count_cs = 0
-count_dr = 0
-count_pt = 0
-count_al = 0
-count_sr = 0
-beta_count = 0
-count_show_folio = 0
-aplha_count = 0
+count = count_pf = count_plt = count_ss = aplha_count =  beta_count = count_al = count_sr =  count_cs = count_pt = count_show_folio = 0
 start_ss = '2018-01-01'
 end_ss = '2018-05-23'
-
 
 # Decent colors
 # 1a3333 (dark more greenish navy blue)
@@ -964,15 +941,6 @@ class CompareStocks(ttk.Frame):
         bottom = ttk.Label(right_frame)
 
         def plot_data(df_comp, company):
-            global count_cs, bottom
-            if (count_cs > 0):
-                bottom.destroy()
-                count_ss = 0
-
-            bottom = ttk.Label(right_frame)
-            bottom.grid(column=0, row=1)
-
-            f1 = Figure(figsize=(8, 4), dpi=100)
             axes = f1.add_subplot(111)
             axes.plot(df_comp)
             axes.set_xlabel('Trading Days since 2012-->')
@@ -980,16 +948,6 @@ class CompareStocks(ttk.Frame):
             axes.set_title("Stock Pricing upto the present day ")
             label = ['SPY', company]
             axes.legend(label, loc=9)
-            canvas = FigureCanvasTkAgg(f1, master=bottom)
-
-            canvas.draw()  # canvas.show()
-            canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
-
-            canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
-            button3 = ttk.Button(bottom, text="Clear ",
-                                 command=lambda: bottom.destroy())
-            button3.pack()
-            count_cs += 1
 
         def option_selection_menu(event):
             company = str(COMPANY_LIST.get(variable.get(), "GOOG"))
@@ -1001,24 +959,9 @@ class CompareStocks(ttk.Frame):
             plot_data(df_norm, company)
             return
 
-        w = ttk.OptionMenu(left_frame, variable, *OPTIONS, command=option_selection_menu)
-        w.pack()
-
-
 class DailyReturns(ttk.Frame):
 
     def __init__(self, parent, controller):
-        ttk.Frame.__init__(self, parent)
-        self.controller = controller
-        left_frame = ttk.Frame(self)
-        left_frame.pack(padx=100, side=LEFT)
-
-        right_frame = ttk.Frame(self)
-        right_frame.pack(padx=10, side=LEFT)
-
-        label = ttk.Label(left_frame, text="Daily Returns", font=controller.title_font, justify='center')
-        label.pack(side="top", fill="x", padx=10, pady=10)
-
         OPTIONS = ["Select Company ", "Google", "Apple", "IBM", "Amazon", "Netflix", "Facebook",
                    "Tesla"]  # etc
 
@@ -1036,35 +979,12 @@ class DailyReturns(ttk.Frame):
         bottom = ttk.Label(right_frame)
 
         def plot_data(df_comp, company):
-            global count_dr, bottom
-            if (count_dr > 0):
-                bottom.destroy()
-                count_dr = 0
-
-            bottom = ttk.Label(right_frame)
-            bottom.grid(column=0, row=1)
-
-            f1 = Figure(figsize=(8, 4), dpi=100)
             axes = f1.add_subplot(111)
             axes.plot(df_comp)
             axes.set_xlabel('Trading Days since 2018-04-23 -->')
             axes.set_ylabel('Price -->')
             axes.set_title("Stock Pricing upto the present day ")
             axes.legend(['SPY', company], loc=9)
-            canvas = FigureCanvasTkAgg(f1, master=bottom)
-
-            canvas.draw()  # canvas.show()
-            canvas.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
-
-            canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
-
-            button3 = ttk.Button(bottom, text="Clear ",
-                                 command=lambda: bottom.destroy())
-            button3.pack()
-
-            count_dr += 1
-
-        res_daily = Label(left_frame, text="", font=("arial", 1))
 
         def create_label(s_ratio, company):
             global count_sr, res_daily
@@ -1090,18 +1010,6 @@ class DailyReturns(ttk.Frame):
             create_label(sharperatio, company)
             print(sharperatio)
             return
-
-        w = ttk.OptionMenu(left_frame, variable, *OPTIONS, command=option_selection_menu)
-        w.pack()
-
-        button2 = ttk.Button(left_frame, text="Go back to Active trading page",
-                             command=lambda: controller.show_frame("ActiveTrading"))
-        button2.pack()
-
-        button = ttk.Button(left_frame, text="Go back to home page",
-                            command=lambda: controller.show_frame("WelcomePage"))
-        button.pack()
-
 
 class PredictLongTerm(ttk.Frame):
 
@@ -1232,15 +1140,4 @@ if __name__ == "__main__":
     app = SampleApp()
     app.state('zoomed')
     app.mainloop()
-
-################################################### End ################################################################
-# rmean, rstddev = get_rolling(df_daily,5)
-# rmean.plot(label="Rolling mean", ax=axes)
-#
-# upperband,lowerband= get_ballinger_bands(rmean,rstddev)
-# upperband.plot(label="Upper Band",ax=axes)
-# lowerband.plot(label="lower Band",ax=axes)
-
-# labels = ['Daily ret. ', 'Rolling mean', 'Upper band', 'Lower band']
-# axes.legend(labels,loc='upper right')
 

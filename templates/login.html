@@ -1,0 +1,47 @@
+
+{% include 'head.html' %}
+{% block content %}
+<body class="">
+    <div class="page">
+      <div class="page-single">
+        <div class="container">
+          <div class="col col-login mx-auto">
+            {% include "_messages.html" %}
+          </div>
+          <div class="row">
+            <div class="col col-login mx-auto">
+              <form class="card" action="" method="post" >
+                <div class="card-body p-6">
+                  <div class="card-title">Login to your account</div>
+                  {% if value %}
+                  {% set phone = value['phone'] %}
+                  {% set password = value['password'] %}
+                  {% set formData={'label':'Phone Number','type':'tel','placeholder':'','name':'phone','value':phone},{'label':'Password','type':'password','placeholder':'','name':'password', 'value':password },
+                  {'label':'OTP','type':'number','placeholder':'Enter OTP','name':'otp'} %}
+                  {% include 'form.html' %}
+                  {% else %}
+                  {% set formData={'label':'Phone Number','type':'number','placeholder':'Enter Number','name':'phone', 'maxlength':'10'},{'label':'Password','type':'password','placeholder':'Enter Password','name':'password'},
+                  {'label':'OTP','type':'number','placeholder':'Enter OTP','name':'otp'} %}
+                  {% include 'form.html' %}
+                  {% endif %}
+
+                  <div class="form-group">
+                      <label class="form-label">
+                          <a href="#" class="float-left">Forgot Password</a>
+                        </label>
+                  </div>
+                  <br>
+
+                  
+                  <div class="form-footer">
+                    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                  </div>
+                </div>
+      </form>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="font-size:5px;font-weight:bold;">Junaid</div>
+{% endblock %}
