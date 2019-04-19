@@ -1,28 +1,30 @@
-# Stock-Market-Trading-Application
+# Stock Market Trading Application
 
-Python-Machine learning project based on the course- "Machine learning for trading" on Udacity. 
-This Code is for runnning a tkinter - GUI application.
-
-Features: 
-1) Analysis
-2) Prediction
-3) Portfolio
-4) Market comparison
+## Features
+* Analysis
+* Market comparison
+* Portfolio
+* Linear Prediction
 
 
-Basic Requirements:
-1) Python 3+
+## Basic Requirements:
+* Python 3+
 
-Python Packages:
-1) Pandas
-2) Numpy
-3) Matlplotlib
-4) Scikitlearn
+### Python Packages
+* Tkinter
+* Pandas
+* Numpy
+* Matlplotlib
+* Scikitlearn
 
-How to run it on your pc:
-First, you'll have to open the project_file in the folder after downloading for the code to run.
-Second, if any of the files, that is uploaded in this repository, is not downloaded, then the code will show errors.
+## Steps To Run
+* Clone the repository
+* Install the required packages
+* Execute the file named "project_file.py"
+*And you're good to go!*
 
-NOTE: Some local paths to data and image files are given in the code, so if they are moved to different locations the program will not run.
+## References
+* [Machine learning for Trading course](https://in.udacity.com/course/machine-learning-for-trading--ud501)
+* [Switching Between Frames in Tkinter](https://stackoverflow.com/questions/7546050/switch-between-two-frames-in-tkinter)
 
-This Project is still in developing stage, only a basic idea of the actual project is presented here. 
+**_NOTE_**: This Project is still under development, only a basic idea of the actual project is presented here. 
